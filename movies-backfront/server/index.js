@@ -11,21 +11,24 @@ const movies = [
     title: 'Star Wars: Episode IV - A New Hope',
     synopsis: 'A long time ago in a galaxy far, far away...',
     rating: 5,
-    genre: 'Sci-Fi, Adventure'
+    genre: 'Sci-Fi, Adventure',
+    Image: "https://m.media-amazon.com/images/I/91uddP3RA5L._UF894,1000_QL80_.jpg"
   },
   {
     id: 2,
     title: 'The Godfather',
     synopsis: 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
     rating: 5,
-    genre: 'Crime, Drama'
+    genre: 'Crime, Drama',
+    Image: "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_.jpg"
   },
   {
     id: 3,
     title: 'Pulp Fiction',
     synopsis: 'The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.',
     rating: 4,
-    genre: 'Crime, Drama'
+    genre: 'Crime, Drama',
+    Image: "https://m.media-amazon.com/images/I/71zSZQzlK+L.jpg"
   },
 ];
 app.use(express.json());
@@ -48,15 +51,16 @@ app.get('/movies/:id', (req, res) => {
 
 // POST create a new movie
 app.post('/movies', (req, res) => {
-  const { title, genre, rating, synopsis } = req.body;
+  const { title, genre, rating, synopsis, Image } = req.body;
   const movie = {
     title,
     genre,
     rating,
     synopsis,
+    Image,
     id: nextId++
   };
-  if (!title || !genre || !rating || !synopsis || rating < 1 || rating > 5) {
+  if (!title || !genre || !rating || !synopsis ||  !Image || rating < 1 || rating > 5) {
     return res.status(400).json({ message: 'Invalid input' });
   }
 
@@ -71,7 +75,7 @@ app.put('/movies/:id', (req, res) => {
 
   const { title, genre, rating, synopsis } = req.body;
 
-  if (!title || !genre || !rating || !synopsis || rating < 1 || rating > 5) {
+  if (!title || !genre || !rating || !synopsis || !Image || rating < 1 || rating > 5) {
     return res.status(400).json({ message: 'Invalid input' });
   }
 
@@ -79,6 +83,7 @@ app.put('/movies/:id', (req, res) => {
   movie.genre = genre;
   movie.rating = rating;
   movie.synopsis = synopsis;
+  movie.Image = Image;
 
   res.json(movie);
 });
