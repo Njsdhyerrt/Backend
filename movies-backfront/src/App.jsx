@@ -8,11 +8,11 @@ import MovieCard from "./butt";
 import { CardGroup } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 
-function App() {
+function App() { // Main App component
   const [movies, setMovies] = useState([]);
   const [modalShow, setModalShow] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { // Fetch movies from backend API
     const response = setTimeout(100);
     response;
     fetch("http://localhost:3001/movies")
@@ -21,9 +21,9 @@ function App() {
       .catch((err) => console.error("Error fetching movies:", err));
   }, []);
 
-  return (
+  return ( // JSX to render the app
     <>
-      <header>
+      <header> 
         <h1
           style={{
             textAlign: "center", color: "white",
@@ -33,7 +33,7 @@ function App() {
         </h1>
       </header>
 
-      <Button variant="dark" onClick={() => setModalShow(true)}>
+      <Button variant="dark" onClick={() => setModalShow(true)}> 
         Add Movie
       </Button>
 
@@ -43,7 +43,7 @@ function App() {
         setMovies={setMovies}
       />
 
-      <div className="main-layout" >
+      <div className="main-layout" > 
         <main>
           <CardGroup className="textcenter">
             <Row md={3}>
@@ -66,6 +66,6 @@ function App() {
       </footer>
     </>
   );
-}
+} // End of App component
 
 export default App;

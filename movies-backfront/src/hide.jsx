@@ -4,7 +4,7 @@ import React from "react";
 import { useState } from "react";
 import ListGroup from 'react-bootstrap/ListGroup'
 
-export function MyVerticallyCenteredModal(props) {
+export function MyVerticallyCenteredModal(props) { // Modal component for adding a new movie
   const setMovies = props.setMovies;
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
@@ -19,20 +19,20 @@ export function MyVerticallyCenteredModal(props) {
       synopsis,
       Image: shape,
     };
-    fetch("http://localhost:3001/movies", {
+    fetch("http://localhost:3001/movies", { // POST request to add a new movie
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newMovie),
-    }).then(() => {
+    }).then(() => { // Refresh movie list after adding
       fetch("http://localhost:3001/movies")
         .then((res) => res.json())
         .then((data) => setMovies(data))
         .catch((err) => console.error("Error fetching movies:", err));
     });
   };
-  return (
+  return ( // JSX for the modal
     <Modal {...props} size="lg">
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -44,7 +44,7 @@ export function MyVerticallyCenteredModal(props) {
 
 
   
-    <ListGroup>
+    <ListGroup> 
       <ListGroup.Item variant="primary"> 
         <p>Title: </p>
         <input
@@ -92,7 +92,7 @@ export function MyVerticallyCenteredModal(props) {
       </ListGroup.Item>
       <Button onClick={createMovie} variant="primary">Add Movie</Button>
     </ListGroup>
-  
+   
 
 
 
@@ -110,9 +110,9 @@ export function MyVerticallyCenteredModal(props) {
       </Modal.Footer>
     </Modal>
   );
-}
+} // End of Modal component
 
-function Lala(props) {
+function Lala(props) { // Component to trigger the modal
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -128,6 +128,6 @@ function Lala(props) {
       />
     </>
   );
-}
+} // End of Lala component
 
-export default Lala;
+export default Lala; // Export Lala component as default
